@@ -20,6 +20,8 @@
   @keyframes tcpop{from{opacity:0;transform:scale(0.94);}to{opacity:1;transform:scale(1);}}
   @media (max-width:680px){
     .tc-navlinks{display:none !important;}
+    .tc-hero{flex-direction:column !important; padding-top:clamp(20px,5vw,32px) !important;}
+    .tc-hero-media{order:-1 !important; width:100% !important; max-width:330px !important; margin:-90px auto 2px !important;}
     .tc-hero-actions{flex-direction:column !important; align-items:stretch !important;}
     .tc-hero-actions a{text-align:center !important;}
   }
@@ -50,8 +52,8 @@
   </header>
 
   <!-- HERO -->
-  <section id="inicio" style="display:flex; flex-wrap:wrap; align-items:center; gap:clamp(28px,5vw,64px); padding:clamp(40px,6vw,90px) clamp(20px,5vw,64px) clamp(30px,4vw,60px);">
-    <div style="flex:1 1 380px; min-width:300px;">
+  <section id="inicio" class="tc-hero" style="display:flex; flex-wrap:wrap; align-items:center; gap:clamp(28px,5vw,64px); padding:clamp(40px,6vw,90px) clamp(20px,5vw,64px) clamp(30px,4vw,60px);">
+    <div class="tc-hero-text" style="flex:1 1 380px; min-width:300px;">
       <p style="margin:0 0 18px; font-size:0.8rem; font-weight:700; letter-spacing:0.24em; text-transform:uppercase; color:var(--accent,#C67B8E);">Floristería artesanal</p>
       <h1 style="margin:0; font-family:'Playfair Display',serif; font-weight:800; font-size:clamp(2.6rem,6vw,4.6rem); line-height:1.04; color:#34452B; letter-spacing:-0.01em;">Flores que dicen lo que el corazón calla</h1>
       <p style="margin:24px 0 0; max-width:30em; font-size:clamp(1rem,1.4vw,1.12rem); color:#544F45;">Ramos y arreglos hechos a mano, fresco para cada entrega. Elige tu favorito del catálogo y lo preparamos con todo el corazón. Pide por WhatsApp o Instagram.</p>
@@ -65,7 +67,7 @@
         <div><div style="font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#34452B;">Flor fresca</div><div style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#766F62;">De temporada</div></div>
       </div>
     </div>
-    <div style="flex:1 1 420px; min-width:300px; position:relative;">
+    <div class="tc-hero-media" style="flex:1 1 420px; min-width:300px; position:relative;">
       <div style="position:relative; width:100%; aspect-ratio:1460/1665;">
         <div style="position:absolute; left:0; right:0; top:27%; bottom:0; border-radius:14px; overflow:hidden; box-shadow:0 30px 60px -28px rgba(52,69,43,0.45); background:#E4DBC8;">
           <img src="assets/p1.png" alt="" style="position:absolute; left:0; top:-37%; width:100%; height:auto; display:block;">

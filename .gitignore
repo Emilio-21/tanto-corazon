@@ -6,3 +6,6 @@ screenshots/
 
 # Vercel
 .vercel/
+
+# Dev local (preview)
+.claude/
