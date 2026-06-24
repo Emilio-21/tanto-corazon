@@ -103,7 +103,7 @@
               <sc-if value="{{ showPrices }}" hint-placeholder-val="{{ true }}">
                 <span style="font-size:1.4rem; font-weight:700; color:#34452B; letter-spacing:-0.01em;">{{ p.price }}</span>
               </sc-if>
-              <a href="{{ p.wa }}" target="_blank" rel="noopener" style="text-decoration:none; background:#5D7654; color:#FBF8F1; font-size:0.86rem; font-weight:700; letter-spacing:0.04em; padding:13px 22px; border-radius:999px;">Pedir</a>
+              <button onClick="{{ p.open }}" style="background:#5D7654; color:#FBF8F1; font-size:0.86rem; font-weight:700; letter-spacing:0.04em; padding:13px 22px; border-radius:999px; border:none; cursor:pointer; font-family:inherit;">Pedir</button>
             </div>
           </div>
         </article>
@@ -187,22 +187,65 @@
     </div>
   </section>
 
-  <!-- LIGHTBOX -->
+  <!-- ORDER CARD / LIGHTBOX -->
   <sc-if value="{{ lightbox }}">
-    <div onClick="{{ closeLightbox }}" style="position:fixed; inset:0; z-index:100; background:rgba(28,30,24,0.82); backdrop-filter:blur(5px); display:flex; align-items:center; justify-content:center; padding:clamp(16px,4vw,48px); animation:tcfade .25s ease;">
-      <div onClick="{{ stopProp }}" style="position:relative; max-width:860px; width:100%; max-height:92vh; display:flex; flex-direction:column; align-items:center; animation:tcpop .3s ease;">
-        <button onClick="{{ closeLightbox }}" aria-label="Cerrar" style="position:absolute; top:-8px; right:-8px; z-index:2; width:46px; height:46px; border:none; border-radius:999px; background:#F2ECDE; color:#34452B; font-size:1.25rem; cursor:pointer; box-shadow:0 8px 18px -6px rgba(0,0,0,0.55);">✕</button>
-        <img src="{{ lightbox.img }}" alt="{{ lightbox.name }}" style="max-width:100%; max-height:72vh; object-fit:contain; border-radius:12px; box-shadow:0 34px 64px -22px rgba(0,0,0,0.65);">
-        <div style="margin-top:18px; text-align:center; color:#F5F0E3;">
+    <div onClick="{{ closeLightbox }}" style="position:fixed; inset:0; z-index:100; background:rgba(28,30,24,0.82); backdrop-filter:blur(5px); display:flex; align-items:flex-start; justify-content:center; padding:clamp(12px,4vw,44px); overflow-y:auto; animation:tcfade .25s ease;">
+      <div onClick="{{ stopProp }}" style="position:relative; max-width:540px; width:100%; margin:auto; background:#FBF8F1; border-radius:18px; overflow:hidden; box-shadow:0 34px 64px -22px rgba(0,0,0,0.65); animation:tcpop .3s ease;">
+        <button onClick="{{ closeLightbox }}" aria-label="Cerrar" style="position:absolute; top:12px; right:12px; z-index:2; width:40px; height:40px; border:none; border-radius:999px; background:rgba(242,236,222,0.92); color:#34452B; font-size:1.1rem; cursor:pointer; box-shadow:0 6px 14px -6px rgba(0,0,0,0.5);">✕</button>
+        <img src="{{ lightbox.img }}" alt="{{ lightbox.name }}" style="width:100%; height:clamp(190px,42vw,290px); object-fit:cover; display:block;">
+
+        <div style="padding:22px clamp(18px,5vw,30px) 26px;">
           <p style="margin:0 0 6px; font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#C67B8E);">{{ lightbox.tag }}</p>
-          <h3 style="margin:0; font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(1.5rem,3vw,2.1rem); line-height:1.1;">{{ lightbox.name }}</h3>
-          <p style="margin:8px auto 0; max-width:34em; font-size:0.95rem; color:#D5D2C3;">{{ lightbox.desc }}</p>
-          <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:center; margin-top:18px;">
-            <sc-if value="{{ showPrices }}" hint-placeholder-val="{{ true }}">
-              <span style="font-size:1.6rem; font-weight:700; color:#FFFFFF; letter-spacing:-0.01em;">{{ lightbox.price }}</span>
-            </sc-if>
-            <a href="{{ lightbox.wa }}" target="_blank" rel="noopener" style="text-decoration:none; background:#5D7654; color:#FBF8F1; font-size:0.9rem; font-weight:700; letter-spacing:0.04em; padding:14px 28px; border-radius:999px;">Pedir por WhatsApp</a>
+          <h3 style="margin:0 0 8px; font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(1.5rem,3vw,2rem); line-height:1.1; color:#34452B;">{{ lightbox.name }}</h3>
+          <p style="margin:0 0 20px; font-size:0.95rem; color:#5E584C; line-height:1.55;">{{ lightbox.desc }}</p>
+
+          <sc-if value="{{ hasSizes }}">
+            <p style="margin:0 0 9px; font-size:0.76rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#766F62;">Tamaño / cantidad de flores</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;">
+              <sc-for list="{{ lbSizes }}" as="s">
+                <button onClick="{{ s.pick }}" style="{{ s.style }}">{{ s.label }}{{ s.priceLabel }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <sc-if value="{{ hasColors }}">
+            <p style="margin:0 0 9px; font-size:0.76rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#766F62;">Color</p>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px;">
+              <sc-for list="{{ lbColors }}" as="c">
+                <button onClick="{{ c.pick }}" style="{{ c.style }}">{{ c.name }}</button>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <p style="margin:0 0 9px; font-size:0.76rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#766F62;">Cantidad</p>
+          <div style="display:flex; align-items:center; gap:14px; margin-bottom:20px;">
+            <button onClick="{{ decQty }}" aria-label="Menos" style="width:42px; height:42px; border-radius:999px; border:1.5px solid rgba(52,69,43,0.28); background:transparent; color:#34452B; font-size:1.35rem; line-height:1; cursor:pointer;">−</button>
+            <span style="font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:700; color:#34452B; min-width:26px; text-align:center;">{{ qty }}</span>
+            <button onClick="{{ incQty }}" aria-label="Más" style="width:42px; height:42px; border-radius:999px; border:1.5px solid rgba(52,69,43,0.28); background:transparent; color:#34452B; font-size:1.35rem; line-height:1; cursor:pointer;">+</button>
           </div>
+
+          <p style="margin:0 0 9px; font-size:0.76rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#766F62;">Mensaje para la carta ✉️</p>
+          <textarea value="{{ carta }}" oninput="{{ onCarta }}" rows="3" placeholder="Escribe aquí lo que quieres que diga la tarjeta…" style="width:100%; box-sizing:border-box; resize:vertical; padding:12px 14px; border-radius:12px; border:1.5px solid rgba(52,69,43,0.2); background:#fff; font-family:inherit; font-size:0.95rem; color:#2C2A24; line-height:1.5; margin-bottom:18px;"></textarea>
+
+          <p style="margin:0 0 9px; font-size:0.76rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#766F62;">Dirección de entrega 📍</p>
+          <textarea value="{{ direccion }}" oninput="{{ onDireccion }}" rows="2" placeholder="Calle, número, colonia, referencias…" style="width:100%; box-sizing:border-box; resize:vertical; padding:12px 14px; border-radius:12px; border:1.5px solid rgba(52,69,43,0.2); background:#fff; font-family:inherit; font-size:0.95rem; color:#2C2A24; line-height:1.5; margin-bottom:18px;"></textarea>
+
+          <p style="margin:0 0 9px; font-size:0.76rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:#766F62;">Fecha / hora deseada 🗓️</p>
+          <input value="{{ fecha }}" oninput="{{ onFecha }}" placeholder="Ej. 14 de feb, por la tarde" style="width:100%; box-sizing:border-box; padding:12px 14px; border-radius:12px; border:1.5px solid rgba(52,69,43,0.2); background:#fff; font-family:inherit; font-size:0.95rem; color:#2C2A24; margin-bottom:22px;">
+
+          <sc-if value="{{ showPrices }}" hint-placeholder-val="{{ true }}">
+            <div style="display:flex; align-items:baseline; justify-content:space-between; margin-bottom:16px; padding-top:14px; border-top:1px solid rgba(52,69,43,0.12);">
+              <span style="font-size:0.85rem; color:#766F62;">Total aproximado</span>
+              <span style="font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#34452B;">{{ totalLabel }}</span>
+            </div>
+          </sc-if>
+
+          <a href="{{ waHref }}" target="_blank" rel="noopener" style="display:block; text-align:center; text-decoration:none; background:#5D7654; color:#FBF8F1; font-size:0.98rem; font-weight:700; letter-spacing:0.03em; padding:16px; border-radius:999px; margin-bottom:10px;">Enviar pedido por WhatsApp</a>
+          <button onClick="{{ sendInstagram }}" style="display:block; width:100%; text-align:center; background:transparent; color:#34452B; font-size:0.92rem; font-weight:700; letter-spacing:0.03em; padding:14px; border-radius:999px; border:1.5px solid rgba(52,69,43,0.3); cursor:pointer; font-family:inherit;">Copiar pedido y abrir Instagram</button>
+          <sc-if value="{{ igCopied }}">
+            <p style="margin:10px 0 0; text-align:center; font-size:0.84rem; color:#5D7654; font-weight:700;">✓ Pedido copiado — pégalo en el chat de Instagram</p>
+          </sc-if>
+          <p style="margin:12px 0 0; text-align:center; font-size:0.78rem; color:#9b9b95;">Te confirmamos disponibilidad y el costo de envío por mensaje.</p>
         </div>
       </div>
     </div>
@@ -212,28 +255,35 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C67B8E&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#C67B8E&quot;,&quot;#5D7654&quot;,&quot;#C68A52&quot;]},&quot;showPrices&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
 class Component extends DCLogic {
-  state = { lightbox: null };
+  state = { lightbox: null, sizeIdx: 0, color: null, qty: 1, carta: '', direccion: '', fecha: '', igCopied: false };
   renderVals() {
     const accent = this.props.accentColor ?? '#C67B8E';
     const showPrices = this.props.showPrices ?? true;
-    const phone = '5210000000000';
-    const wa = (name) => 'https://wa.me/' + phone + '?text=' + encodeURIComponent('Hola Tanto Corazón, me interesa el ' + name + '. ¿Me das más información?');
+    const phone = '5210000000000';        // ← TU número de WhatsApp (internacional, sin +)
+    const igUser = 'tantocorazon';         // ← TU usuario de Instagram
+    const fmt = (n) => '$' + Number(n).toLocaleString('es-MX');
 
+    // Cada producto puede tener `sizes` (variaciones de cantidad de flores) y `colors` (opcionales).
+    // ⚠️ Los precios de las variantes son tentativos: ajústalos a tus precios reales.
     const raw = [
-      { img:'assets/p1.png', tag:'Arreglo en base', name:'Arreglo Soleil', desc:'Girasoles, rosas durazno y lisianthus en base de cerámica.', price:'$1,450' },
-      { img:'assets/p6.png', tag:'Mini · Chico · Mediano', name:'Diseño Libre Rosa y Lila', desc:'Mezcla de temporada en tonos rosa y lila. De 10 a 20 tallos.', price:'desde $700' },
-      { img:'assets/p7.png', tag:'5 ó 10 gerberas', name:'Gerberas y Follaje', desc:'Gerberas rosas con eucalipto y follaje fresco.', price:'desde $490' },
-      { img:'assets/p4.png', tag:'Ramo grande', name:'Lisianthus, Rosas y Claveles', desc:'1 paq. de lisianthus, 24 claveles y 20 rosas en tonos rosa.', price:'$1,950' },
-      { img:'assets/p2.png', tag:'Ramo', name:'Ramo Aurora', desc:'Lilis, rosas blancas y crisantemo en papel durazno.', price:'$1,200' },
-      { img:'assets/p3.png', tag:'Ramo', name:'Ramo Encanto', desc:'Rosas rojas, rosadas y crema con eucalipto.', price:'$1,150' },
-      { img:'assets/p5.png', tag:'Ramo', name:'Ramo Primavera', desc:'Tulipanes, crisantemos y claveles en papel olivo.', price:'$890' },
-      { img:'assets/p8.png', tag:'Ramo firma', name:'Ramo Tanto Corazón', desc:'Rosas y claveles en tonos durazno y rosa empolvado.', price:'$1,250' }
+      { img:'assets/p1.png', tag:'Arreglo en base', name:'Arreglo Soleil', desc:'Girasoles, rosas durazno y lisianthus en base de cerámica.', price:'$1,450', priceNum:1450 },
+      { img:'assets/p6.png', tag:'Diseño libre', name:'Diseño Libre Rosa y Lila', desc:'Mezcla de temporada en tonos rosa y lila. Elige el tamaño.', price:'desde $700', priceNum:700,
+        sizes:[ {label:'Mini · 10 tallos', price:700}, {label:'Chico · 15 tallos', price:950}, {label:'Mediano · 20 tallos', price:1200} ],
+        colors:['Rosa y lila','Tonos durazno','Blanco y verde'] },
+      { img:'assets/p7.png', tag:'Gerberas', name:'Gerberas y Follaje', desc:'Gerberas con eucalipto y follaje fresco.', price:'desde $490', priceNum:490,
+        sizes:[ {label:'5 gerberas', price:490}, {label:'10 gerberas', price:790} ],
+        colors:['Rosa','Surtido','Amarillo','Rojo'] },
+      { img:'assets/p4.png', tag:'Ramo grande', name:'Lisianthus, Rosas y Claveles', desc:'1 paq. de lisianthus, 24 claveles y 20 rosas en tonos rosa.', price:'$1,950', priceNum:1950 },
+      { img:'assets/p2.png', tag:'Ramo', name:'Ramo Aurora', desc:'Lilis, rosas blancas y crisantemo en papel durazno.', price:'$1,200', priceNum:1200 },
+      { img:'assets/p3.png', tag:'Ramo', name:'Ramo Encanto', desc:'Rosas rojas, rosadas y crema con eucalipto.', price:'$1,150', priceNum:1150 },
+      { img:'assets/p5.png', tag:'Ramo', name:'Ramo Primavera', desc:'Tulipanes, crisantemos y claveles en papel olivo.', price:'$890', priceNum:890 },
+      { img:'assets/p8.png', tag:'Ramo firma', name:'Ramo Tanto Corazón', desc:'Rosas y claveles en tonos durazno y rosa empolvado.', price:'$1,250', priceNum:1250 }
     ];
-    const products = raw.map(p => {
-      const item = { ...p, wa: wa(p.name) };
-      item.open = () => this.setState({ lightbox: item });
-      return item;
-    });
+
+    const products = raw.map(p => ({
+      ...p,
+      open: () => this.setState({ lightbox: p, sizeIdx: 0, color: (p.colors && p.colors[0]) || null, qty: 1, carta: '', direccion: '', fecha: '', igCopied: false })
+    }));
 
     const policies = [
       { title:'Pago', body:'Anticipo del 50% para apartar tu fecha. El pedido se liquida mínimo un día antes de la entrega.' },
@@ -243,13 +293,74 @@ class Component extends DCLogic {
       { title:'Confidencialidad', body:'Tus datos y los detalles de tu pedido se tratan con total confidencialidad y no se comparten con terceros.' }
     ];
 
+    // ---------- Tarjeta de pedido ----------
+    const lb = this.state.lightbox;
+    const sizeIdx = this.state.sizeIdx || 0;
+    const qty = this.state.qty || 1;
+    const hasSizes = !!(lb && lb.sizes && lb.sizes.length);
+    const hasColors = !!(lb && lb.colors && lb.colors.length);
+    const unit = lb ? (hasSizes ? lb.sizes[sizeIdx].price : lb.priceNum) : 0;
+    const total = unit * qty;
+
+    const btnBase = 'padding:10px 15px; border-radius:999px; font-size:0.85rem; font-weight:700; cursor:pointer; border:1.5px solid; font-family:inherit;';
+    const sizeOn  = btnBase + ' background:#34452B; color:#FBF8F1; border-color:#34452B;';
+    const sizeOff = btnBase + ' background:transparent; color:#34452B; border-color:rgba(52,69,43,0.28);';
+    const colOn   = btnBase + ' background:#C67B8E; color:#FFFFFF; border-color:#C67B8E;';
+
+    const lbSizes = (hasSizes ? lb.sizes : []).map((s, i) => ({
+      label: s.label,
+      priceLabel: showPrices ? ('  ·  ' + fmt(s.price)) : '',
+      style: i === sizeIdx ? sizeOn : sizeOff,
+      pick: () => this.setState({ sizeIdx: i })
+    }));
+    const lbColors = (hasColors ? lb.colors : []).map((c) => ({
+      name: c,
+      style: this.state.color === c ? colOn : sizeOff,
+      pick: () => this.setState({ color: c })
+    }));
+
+    const buildOrder = () => {
+      if (!lb) return '';
+      const L = [];
+      L.push('Hola Tanto Corazón 🌷 Quiero hacer un pedido:');
+      L.push('');
+      L.push('• Arreglo: ' + lb.name);
+      if (hasSizes) L.push('• Opción: ' + lb.sizes[sizeIdx].label + (showPrices ? ('  —  ' + fmt(lb.sizes[sizeIdx].price)) : ''));
+      if (hasColors) L.push('• Color: ' + (this.state.color || lb.colors[0]));
+      L.push('• Cantidad: ' + qty);
+      if (showPrices) L.push('• Total aprox: ' + fmt(total));
+      L.push('');
+      L.push('✉️ Carta: ' + (this.state.carta && this.state.carta.trim() ? ('"' + this.state.carta.trim() + '"') : '(la confirmo por aquí)'));
+      if (this.state.direccion && this.state.direccion.trim()) L.push('📍 Entrega: ' + this.state.direccion.trim());
+      if (this.state.fecha && this.state.fecha.trim()) L.push('🗓️ Fecha: ' + this.state.fecha.trim());
+      return L.join('\n');
+    };
+
+    const orderText = buildOrder();
+    const waHref = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(orderText);
+    const sendInstagram = (e) => {
+      if (e && e.preventDefault) e.preventDefault();
+      try { if (navigator.clipboard) navigator.clipboard.writeText(orderText); } catch (_) {}
+      this.setState({ igCopied: true });
+      window.open('https://ig.me/m/' + igUser, '_blank', 'noopener');
+    };
+
     return {
       accent, showPrices, products, policies,
-      lightbox: this.state.lightbox,
+      lightbox: lb,
+      hasSizes, hasColors, lbSizes, lbColors, qty,
+      carta: this.state.carta, direccion: this.state.direccion, fecha: this.state.fecha,
+      totalLabel: fmt(total), igCopied: this.state.igCopied,
+      waHref, sendInstagram,
+      decQty: () => this.setState({ qty: Math.max(1, (this.state.qty || 1) - 1) }),
+      incQty: () => this.setState({ qty: (this.state.qty || 1) + 1 }),
+      onCarta: (e) => this.setState({ carta: e.target.value }),
+      onDireccion: (e) => this.setState({ direccion: e.target.value }),
+      onFecha: (e) => this.setState({ fecha: e.target.value }),
       closeLightbox: () => this.setState({ lightbox: null }),
       stopProp: (e) => e.stopPropagation(),
       waGeneral: 'https://wa.me/' + phone + '?text=' + encodeURIComponent('Hola Tanto Corazón, quiero hacer un pedido.'),
-      instagram: 'https://instagram.com/tantocorazon'
+      instagram: 'https://instagram.com/' + igUser
     };
   }
 }
