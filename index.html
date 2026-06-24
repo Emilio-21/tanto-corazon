@@ -24,6 +24,10 @@
     .tc-hero-media{order:-1 !important; width:100% !important; max-width:330px !important; margin:-90px auto 2px !important;}
     .tc-hero-actions{flex-direction:column !important; align-items:stretch !important;}
     .tc-hero-actions a{text-align:center !important;}
+    .tc-hero-text{text-align:center !important;}
+    .tc-hero-stats{flex-wrap:nowrap !important; justify-content:center !important; gap:12px !important;}
+    .tc-hero-stats > div > div:first-child{font-size:1.1rem !important; white-space:nowrap !important;}
+    .tc-hero-stats > div > div:last-child{font-size:0.56rem !important; letter-spacing:0.04em !important;}
   }
   @media (max-width:430px){
     .tc-card-foot{flex-direction:column !important; align-items:stretch !important;}
@@ -61,7 +65,7 @@
         <a href="#catalogo" style="text-decoration:none; background:#34452B; color:#FBF8F1; font-size:0.95rem; font-weight:700; letter-spacing:0.04em; padding:16px 28px; border-radius:999px;">Ver catálogo</a>
         <a href="{{ instagram }}" target="_blank" rel="noopener" style="text-decoration:none; background:transparent; color:#34452B; font-size:0.92rem; font-weight:700; letter-spacing:0.04em; padding:15px 28px; border-radius:999px; border:1.5px solid rgba(52,69,43,0.35);">Síguenos en Instagram</a>
       </div>
-      <div style="display:flex; flex-wrap:wrap; gap:24px; margin-top:38px; padding-top:26px; border-top:1px solid rgba(52,69,43,0.14);">
+      <div class="tc-hero-stats" style="display:flex; flex-wrap:wrap; gap:24px; margin-top:38px; padding-top:26px; border-top:1px solid rgba(52,69,43,0.14);">
         <div><div style="font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#34452B;">100%</div><div style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#766F62;">Hecho a mano</div></div>
         <div><div style="font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#34452B;">Mismo día</div><div style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#766F62;">Entrega disponible</div></div>
         <div><div style="font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#34452B;">Flor fresca</div><div style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#766F62;">De temporada</div></div>
