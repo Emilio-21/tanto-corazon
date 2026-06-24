@@ -1,0 +1,8 @@
+# Material de trabajo, no forma parte del sitio publicado
+uploads/
+screenshots/
+.thumbnail
+.DS_Store
+
+# Vercel
+.vercel/

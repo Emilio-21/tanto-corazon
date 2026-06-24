@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;}
+  @keyframes tcfloat{0%,100%{transform:translateY(0);}50%{transform:translateY(-10px);}}
+  @keyframes tcfade{from{opacity:0;}to{opacity:1;}}
+  @keyframes tcpop{from{opacity:0;transform:scale(0.94);}to{opacity:1;transform:scale(1);}}
+  @media (max-width:680px){
+    .tc-navlinks{display:none !important;}
+    .tc-hero-actions{flex-direction:column !important; align-items:stretch !important;}
+    .tc-hero-actions a{text-align:center !important;}
+  }
+  @media (max-width:430px){
+    .tc-card-foot{flex-direction:column !important; align-items:stretch !important;}
+    .tc-card-foot a{text-align:center !important;}
+    .tc-contact a{flex:1 1 100% !important; text-align:center !important;}
+  }
+</style>
+</helmet>
+<div style="--accent: {{ accent }}; background:#F2ECDE; color:#2C2A24; font-family:'Helvetica Neue',Helvetica,Arial,sans-serif; line-height:1.55; overflow-x:hidden; min-height:100vh;">
+
+  <!-- NAV -->
+  <header style="position:sticky; top:0; z-index:50; display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap; padding:14px clamp(20px,5vw,64px); background:rgba(242,236,222,0.86); backdrop-filter:blur(10px); border-bottom:1px solid rgba(52,69,43,0.12);">
+    <a href="#inicio" style="display:flex; align-items:center; gap:12px; text-decoration:none; color:inherit;">
+      <img src="assets/logo-circle.png" alt="Tanto Corazón" style="width:46px; height:46px; display:block;">
+      <span style="font-family:'Playfair Display',serif; font-style:italic; font-weight:600; font-size:1.5rem; color:#34452B; letter-spacing:0.01em;">Tanto Corazón</span>
+    </a>
+    <nav style="display:flex; align-items:center; gap:clamp(14px,2.4vw,30px); flex-wrap:wrap;">
+      <span class="tc-navlinks" style="display:flex; align-items:center; gap:clamp(16px,2.4vw,30px);">
+        <a href="#catalogo" style="text-decoration:none; color:#34452B; font-size:0.82rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;">Catálogo</a>
+        <a href="#entregas" style="text-decoration:none; color:#34452B; font-size:0.82rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;">Entregas</a>
+        <a href="#envio" style="text-decoration:none; color:#34452B; font-size:0.82rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;">Envíos</a>
+        <a href="#contacto" style="text-decoration:none; color:#34452B; font-size:0.82rem; font-weight:600; letter-spacing:0.14em; text-transform:uppercase;">Contacto</a>
+      </span>
+      <a href="{{ waGeneral }}" target="_blank" rel="noopener" style="text-decoration:none; background:#5D7654; color:#FBF8F1; font-size:0.82rem; font-weight:700; letter-spacing:0.05em; padding:12px 20px; border-radius:999px;">WhatsApp</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section id="inicio" style="display:flex; flex-wrap:wrap; align-items:center; gap:clamp(28px,5vw,64px); padding:clamp(40px,6vw,90px) clamp(20px,5vw,64px) clamp(30px,4vw,60px);">
+    <div style="flex:1 1 380px; min-width:300px;">
+      <p style="margin:0 0 18px; font-size:0.8rem; font-weight:700; letter-spacing:0.24em; text-transform:uppercase; color:var(--accent,#C67B8E);">Floristería artesanal</p>
+      <h1 style="margin:0; font-family:'Playfair Display',serif; font-weight:800; font-size:clamp(2.6rem,6vw,4.6rem); line-height:1.04; color:#34452B; letter-spacing:-0.01em;">Flores que dicen lo que el corazón calla</h1>
+      <p style="margin:24px 0 0; max-width:30em; font-size:clamp(1rem,1.4vw,1.12rem); color:#544F45;">Ramos y arreglos hechos a mano, fresco para cada entrega. Elige tu favorito del catálogo y lo preparamos con todo el corazón. Pide por WhatsApp o Instagram.</p>
+      <div class="tc-hero-actions" style="display:flex; flex-wrap:wrap; gap:14px; margin-top:30px;">
+        <a href="#catalogo" style="text-decoration:none; background:#34452B; color:#FBF8F1; font-size:0.95rem; font-weight:700; letter-spacing:0.04em; padding:16px 28px; border-radius:999px;">Ver catálogo</a>
+        <a href="{{ instagram }}" target="_blank" rel="noopener" style="text-decoration:none; background:transparent; color:#34452B; font-size:0.92rem; font-weight:700; letter-spacing:0.04em; padding:15px 28px; border-radius:999px; border:1.5px solid rgba(52,69,43,0.35);">Síguenos en Instagram</a>
+      </div>
+      <div style="display:flex; flex-wrap:wrap; gap:24px; margin-top:38px; padding-top:26px; border-top:1px solid rgba(52,69,43,0.14);">
+        <div><div style="font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#34452B;">100%</div><div style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#766F62;">Hecho a mano</div></div>
+        <div><div style="font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#34452B;">Mismo día</div><div style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#766F62;">Entrega disponible</div></div>
+        <div><div style="font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:700; color:#34452B;">Flor fresca</div><div style="font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; color:#766F62;">De temporada</div></div>
+      </div>
+    </div>
+    <div style="flex:1 1 420px; min-width:300px; position:relative;">
+      <div style="position:relative; width:100%; aspect-ratio:1460/1665;">
+        <div style="position:absolute; left:0; right:0; top:27%; bottom:0; border-radius:14px; overflow:hidden; box-shadow:0 30px 60px -28px rgba(52,69,43,0.45); background:#E4DBC8;">
+          <img src="assets/p1.png" alt="" style="position:absolute; left:0; top:-37%; width:100%; height:auto; display:block;">
+        </div>
+        <img src="assets/p1-cutout.png" alt="Arreglo de temporada Tanto Corazón" style="position:absolute; left:0; top:0; width:100%; height:auto; display:block; pointer-events:none; filter:drop-shadow(0 6px 9px rgba(52,69,43,0.16));">
+      </div>
+      <div style="position:absolute; left:-14px; bottom:-18px; background:#F2ECDE; border-radius:999px; padding:10px; box-shadow:0 14px 30px -14px rgba(52,69,43,0.5); animation:tcfloat 6s ease-in-out infinite;">
+        <img src="assets/logo-circle.png" alt="" style="width:74px; height:74px; display:block;">
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section id="catalogo" style="padding:clamp(48px,6vw,96px) clamp(20px,5vw,64px);">
+    <div style="max-width:760px; margin:0 auto clamp(34px,4vw,56px); text-align:center;">
+      <p style="margin:0 0 14px; font-size:0.8rem; font-weight:700; letter-spacing:0.24em; text-transform:uppercase; color:var(--accent,#C67B8E);">El catálogo</p>
+      <h2 style="margin:0; font-family:'Playfair Display',serif; font-weight:800; font-size:clamp(2rem,4.5vw,3.3rem); line-height:1.06; color:#34452B;">Ramos y arreglos para cada motivo</h2>
+      <p style="margin:18px auto 0; max-width:36em; font-size:1.02rem; color:#544F45;">Cada pieza es 100% personalizable. El diseño libre varía según la flor disponible, siempre respetando los colores y la calidad que elijas.</p>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:clamp(20px,3vw,38px); max-width:1280px; margin:0 auto;">
+      <sc-for list="{{ products }}" as="p" hint-placeholder-count="8">
+        <article style="background:#FBF8F1; border-radius:14px; overflow:hidden; display:flex; flex-direction:column; box-shadow:0 18px 40px -30px rgba(52,69,43,0.5); border:1px solid rgba(52,69,43,0.06);">
+          <div onClick="{{ p.open }}" style="position:relative; aspect-ratio:4/5; overflow:hidden; background:#E4DBC8; cursor:zoom-in;">
+            <img src="{{ p.img }}" alt="{{ p.name }}" style="width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s ease;" style-hover="transform:scale(1.05);">
+            <span style="position:absolute; right:12px; bottom:12px; width:38px; height:38px; border-radius:999px; background:rgba(242,236,222,0.92); color:#34452B; font-size:1.5rem; font-weight:300; line-height:36px; text-align:center; box-shadow:0 4px 12px -4px rgba(52,69,43,0.5);">+</span>
+          </div>
+          <div style="padding:22px 22px 24px; display:flex; flex-direction:column; flex:1;">
+            <p style="margin:0 0 8px; font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#C67B8E);">{{ p.tag }}</p>
+            <h3 style="margin:0 0 8px; font-family:'Playfair Display',serif; font-weight:700; font-size:1.5rem; line-height:1.1; color:#34452B;">{{ p.name }}</h3>
+            <p style="margin:0 0 20px; font-size:0.94rem; color:#5E584C; flex:1;">{{ p.desc }}</p>
+            <div class="tc-card-foot" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap; margin-top:auto; padding-top:14px; border-top:1px solid rgba(52,69,43,0.1);">
+              <sc-if value="{{ showPrices }}" hint-placeholder-val="{{ true }}">
+                <span style="font-size:1.4rem; font-weight:700; color:#34452B; letter-spacing:-0.01em;">{{ p.price }}</span>
+              </sc-if>
+              <a href="{{ p.wa }}" target="_blank" rel="noopener" style="text-decoration:none; background:#5D7654; color:#FBF8F1; font-size:0.86rem; font-weight:700; letter-spacing:0.04em; padding:13px 22px; border-radius:999px;">Pedir</a>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- DELIVERY / POLICIES -->
+  <section id="entregas" style="background:#34452B; color:#EFE9DA; padding:clamp(52px,6vw,100px) clamp(20px,5vw,64px);">
+    <div style="max-width:760px; margin:0 auto clamp(34px,4vw,54px); text-align:center;">
+      <p style="margin:0 0 14px; font-size:0.8rem; font-weight:700; letter-spacing:0.24em; text-transform:uppercase; color:var(--accent,#C67B8E);">Antes de pedir</p>
+      <h2 style="margin:0; font-family:'Playfair Display',serif; font-weight:800; font-size:clamp(2rem,4.5vw,3.2rem); line-height:1.06; color:#F5F0E3;">Políticas y condiciones</h2>
+      <p style="margin:18px auto 0; max-width:34em; font-size:1.02rem; color:#C9C7B5;">Gracias por elegirnos. Queremos que tu pedido llegue perfecto, por eso te compartimos lo importante.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:clamp(18px,2.5vw,30px); max-width:1180px; margin:0 auto;">
+      <sc-for list="{{ policies }}" as="po" hint-placeholder-count="5">
+        <div style="padding:26px 24px; border-top:2px solid var(--accent,#C67B8E); background:rgba(255,255,255,0.035); border-radius:0 0 12px 12px;">
+          <h3 style="margin:0 0 12px; font-family:'Playfair Display',serif; font-weight:700; font-size:1.3rem; color:#F5F0E3;">{{ po.title }}</h3>
+          <p style="margin:0; font-size:0.94rem; color:#C9C7B5; line-height:1.6;">{{ po.body }}</p>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- SHIPPING COSTS -->
+  <section id="envio" style="padding:clamp(52px,6vw,100px) clamp(20px,5vw,64px); background:#F2ECDE;">
+    <div style="max-width:760px; margin:0 auto clamp(28px,3.5vw,44px); text-align:center;">
+      <p style="margin:0 0 14px; font-size:0.8rem; font-weight:700; letter-spacing:0.24em; text-transform:uppercase; color:var(--accent,#C67B8E);">Cobertura · San Luis Potosí</p>
+      <h2 style="margin:0; font-family:'Playfair Display',serif; font-weight:800; font-size:clamp(2rem,4.5vw,3.2rem); line-height:1.06; color:#34452B;">Costos de envío</h2>
+      <p style="margin:18px auto 0; max-width:40em; font-size:1.02rem; color:#544F45;"><strong>No nos comprometemos a una hora de entrega específica.</strong> Es necesario agendar un lugar y horario donde podamos encontrar a tu persona favorita en un lapso aproximado de 2 horas.</p>
+    </div>
+    <div style="max-width:1120px; margin:0 auto; display:flex; flex-wrap:wrap; gap:clamp(22px,3vw,40px); align-items:stretch;">
+      <div style="flex:1 1 360px; min-width:280px; align-self:flex-start; border-radius:14px; overflow:hidden; box-shadow:0 22px 46px -30px rgba(52,69,43,0.5); background:#E4DBC8;">
+        <img src="assets/mapa-envio.png" alt="Mapa de zonas de entrega en San Luis Potosí" style="width:100%; height:auto; display:block;">
+      </div>
+      <div style="flex:1 1 320px; min-width:280px; display:flex; flex-direction:column; gap:18px;">
+        <div style="background:#FBF8F1; border-radius:14px; padding:26px; box-shadow:0 18px 40px -32px rgba(52,69,43,0.5); border-left:5px solid #5C6F92; flex:1;">
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <span style="width:20px; height:20px; border-radius:50%; background:#5C6F92; margin-top:5px; flex:none;"></span>
+            <div>
+              <p style="margin:0 0 4px; font-size:0.74rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#5C6F92;">Zona azul</p>
+              <p style="margin:0 0 10px; font-size:1rem; font-weight:600; color:#34452B; line-height:1.4;">Zona Centro, Morales, Lomas, El Paseo, Dalias, Soledad (Centro)</p>
+              <p style="margin:0; font-family:'Playfair Display',serif; font-weight:700; font-size:1.9rem; color:#34452B;">$100</p>
+            </div>
+          </div>
+        </div>
+        <div style="background:#FBF8F1; border-radius:14px; padding:26px; box-shadow:0 18px 40px -32px rgba(52,69,43,0.5); border-left:5px solid #D9A7B6; flex:1;">
+          <div style="display:flex; gap:14px; align-items:flex-start;">
+            <span style="width:20px; height:20px; border-radius:50%; background:#D9A7B6; margin-top:5px; flex:none;"></span>
+            <div>
+              <p style="margin:0 0 4px; font-size:0.74rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#C07F92;">Zona rosa</p>
+              <p style="margin:0 0 10px; font-size:1rem; font-weight:600; color:#34452B; line-height:1.4;">Club de Golf, Villa Magna, Capulines, Zona Industrial, Pozos</p>
+              <p style="margin:0; font-family:'Playfair Display',serif; font-weight:700; font-size:1.9rem; color:#34452B;">$150 – $200</p>
+            </div>
+          </div>
+        </div>
+        <p style="margin:2px 0 0; font-size:0.86rem; color:#766F62;">¿Tu zona no aparece? Escríbenos por WhatsApp y te confirmamos el costo de envío.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT / FOOTER -->
+  <section id="contacto" style="padding:clamp(56px,7vw,110px) clamp(20px,5vw,64px) 0; text-align:center;">
+    <img src="assets/logo-circle.png" alt="Tanto Corazón" style="width:96px; height:96px; display:block; margin:0 auto 20px;">
+    <h2 style="margin:0; font-family:'Playfair Display',serif; font-style:italic; font-weight:600; font-size:clamp(2.2rem,5vw,3.4rem); color:#34452B;">Tanto Corazón</h2>
+    <p style="margin:16px auto 0; max-width:30em; font-size:1.05rem; color:#544F45;">Cuéntanos qué quieres regalar y para cuándo. Estamos para ayudarte a decirlo con flores.</p>
+    <div class="tc-contact" style="display:flex; flex-wrap:wrap; justify-content:center; gap:14px; margin-top:30px;">
+      <a href="{{ waGeneral }}" target="_blank" rel="noopener" style="text-decoration:none; background:#5D7654; color:#FBF8F1; font-size:0.95rem; font-weight:700; letter-spacing:0.04em; padding:16px 30px; border-radius:999px;">WhatsApp</a>
+      <a href="{{ instagram }}" target="_blank" rel="noopener" style="text-decoration:none; background:transparent; color:#34452B; font-size:0.95rem; font-weight:700; letter-spacing:0.04em; padding:15px 30px; border-radius:999px; border:1.5px solid rgba(52,69,43,0.35);">Instagram</a>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:24px; max-width:880px; margin:54px auto 0; text-align:left;">
+      <div><p style="margin:0 0 6px; font-size:0.74rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#C67B8E);">WhatsApp</p><p style="margin:0; font-size:1rem; color:#34452B;">+52 55 0000 0000</p></div>
+      <div><p style="margin:0 0 6px; font-size:0.74rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#C67B8E);">Instagram</p><p style="margin:0; font-size:1rem; color:#34452B;">@tantocorazon</p></div>
+      <div><p style="margin:0 0 6px; font-size:0.74rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#C67B8E);">Ubicación</p><p style="margin:0; font-size:1rem; color:#34452B;">San Luis Potosí, México</p></div>
+      <div><p style="margin:0 0 6px; font-size:0.74rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#C67B8E);">Horario</p><p style="margin:0; font-size:1rem; color:#34452B;">Lun a Sáb · 9 a 7</p></div>
+    </div>
+
+    <div style="margin-top:clamp(48px,6vw,80px); padding:24px 0; border-top:1px solid rgba(52,69,43,0.14);">
+      <p style="margin:0; font-size:0.82rem; color:#8A8475;">© Tanto Corazón · Floristería artesanal · Hecho con flor fresca de temporada</p>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <sc-if value="{{ lightbox }}">
+    <div onClick="{{ closeLightbox }}" style="position:fixed; inset:0; z-index:100; background:rgba(28,30,24,0.82); backdrop-filter:blur(5px); display:flex; align-items:center; justify-content:center; padding:clamp(16px,4vw,48px); animation:tcfade .25s ease;">
+      <div onClick="{{ stopProp }}" style="position:relative; max-width:860px; width:100%; max-height:92vh; display:flex; flex-direction:column; align-items:center; animation:tcpop .3s ease;">
+        <button onClick="{{ closeLightbox }}" aria-label="Cerrar" style="position:absolute; top:-8px; right:-8px; z-index:2; width:46px; height:46px; border:none; border-radius:999px; background:#F2ECDE; color:#34452B; font-size:1.25rem; cursor:pointer; box-shadow:0 8px 18px -6px rgba(0,0,0,0.55);">✕</button>
+        <img src="{{ lightbox.img }}" alt="{{ lightbox.name }}" style="max-width:100%; max-height:72vh; object-fit:contain; border-radius:12px; box-shadow:0 34px 64px -22px rgba(0,0,0,0.65);">
+        <div style="margin-top:18px; text-align:center; color:#F5F0E3;">
+          <p style="margin:0 0 6px; font-size:0.72rem; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent,#C67B8E);">{{ lightbox.tag }}</p>
+          <h3 style="margin:0; font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(1.5rem,3vw,2.1rem); line-height:1.1;">{{ lightbox.name }}</h3>
+          <p style="margin:8px auto 0; max-width:34em; font-size:0.95rem; color:#D5D2C3;">{{ lightbox.desc }}</p>
+          <div style="display:flex; flex-wrap:wrap; gap:16px; justify-content:center; align-items:center; margin-top:18px;">
+            <sc-if value="{{ showPrices }}" hint-placeholder-val="{{ true }}">
+              <span style="font-size:1.6rem; font-weight:700; color:#FFFFFF; letter-spacing:-0.01em;">{{ lightbox.price }}</span>
+            </sc-if>
+            <a href="{{ lightbox.wa }}" target="_blank" rel="noopener" style="text-decoration:none; background:#5D7654; color:#FBF8F1; font-size:0.9rem; font-weight:700; letter-spacing:0.04em; padding:14px 28px; border-radius:999px;">Pedir por WhatsApp</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;color&quot;,&quot;default&quot;:&quot;#C67B8E&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;options&quot;:[&quot;#C67B8E&quot;,&quot;#5D7654&quot;,&quot;#C68A52&quot;]},&quot;showPrices&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  state = { lightbox: null };
+  renderVals() {
+    const accent = this.props.accentColor ?? '#C67B8E';
+    const showPrices = this.props.showPrices ?? true;
+    const phone = '5210000000000';
+    const wa = (name) => 'https://wa.me/' + phone + '?text=' + encodeURIComponent('Hola Tanto Corazón, me interesa el ' + name + '. ¿Me das más información?');
+
+    const raw = [
+      { img:'assets/p1.png', tag:'Arreglo en base', name:'Arreglo Soleil', desc:'Girasoles, rosas durazno y lisianthus en base de cerámica.', price:'$1,450' },
+      { img:'assets/p6.png', tag:'Mini · Chico · Mediano', name:'Diseño Libre Rosa y Lila', desc:'Mezcla de temporada en tonos rosa y lila. De 10 a 20 tallos.', price:'desde $700' },
+      { img:'assets/p7.png', tag:'5 ó 10 gerberas', name:'Gerberas y Follaje', desc:'Gerberas rosas con eucalipto y follaje fresco.', price:'desde $490' },
+      { img:'assets/p4.png', tag:'Ramo grande', name:'Lisianthus, Rosas y Claveles', desc:'1 paq. de lisianthus, 24 claveles y 20 rosas en tonos rosa.', price:'$1,950' },
+      { img:'assets/p2.png', tag:'Ramo', name:'Ramo Aurora', desc:'Lilis, rosas blancas y crisantemo en papel durazno.', price:'$1,200' },
+      { img:'assets/p3.png', tag:'Ramo', name:'Ramo Encanto', desc:'Rosas rojas, rosadas y crema con eucalipto.', price:'$1,150' },
+      { img:'assets/p5.png', tag:'Ramo', name:'Ramo Primavera', desc:'Tulipanes, crisantemos y claveles en papel olivo.', price:'$890' },
+      { img:'assets/p8.png', tag:'Ramo firma', name:'Ramo Tanto Corazón', desc:'Rosas y claveles en tonos durazno y rosa empolvado.', price:'$1,250' }
+    ];
+    const products = raw.map(p => {
+      const item = { ...p, wa: wa(p.name) };
+      item.open = () => this.setState({ lightbox: item });
+      return item;
+    });
+
+    const policies = [
+      { title:'Pago', body:'Anticipo del 50% para apartar tu fecha. El pedido se liquida mínimo un día antes de la entrega.' },
+      { title:'Cargo por entrega', body:'El envío es adicional al precio del arreglo. El repartidor espera 15 min como máximo; no garantizamos hora exacta.' },
+      { title:'Cancelaciones', body:'Reagenda o cancela con 48 hrs de anticipación para recibir un reembolso parcial. Después de ese plazo no hay devoluciones.' },
+      { title:'Disponibilidad de flor', body:'Cada arreglo es 100% personalizado. La flor puede variar según la temporada, siempre por una de igual o mayor calidad y con tu autorización.' },
+      { title:'Confidencialidad', body:'Tus datos y los detalles de tu pedido se tratan con total confidencialidad y no se comparten con terceros.' }
+    ];
+
+    return {
+      accent, showPrices, products, policies,
+      lightbox: this.state.lightbox,
+      closeLightbox: () => this.setState({ lightbox: null }),
+      stopProp: (e) => e.stopPropagation(),
+      waGeneral: 'https://wa.me/' + phone + '?text=' + encodeURIComponent('Hola Tanto Corazón, quiero hacer un pedido.'),
+      instagram: 'https://instagram.com/tantocorazon'
+    };
+  }
+}
+</script>
+</body>
+</html>
